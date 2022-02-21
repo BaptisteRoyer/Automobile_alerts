@@ -1,7 +1,20 @@
-.car_state{
+#car_state{
     width: 100%;
     border: solid 1.5px;
     border-color: black;
+    text-align: center;
+    padding: 0.5em;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-radius:5px;
+    margin-bottom: 4px;
+}
+
+#light_state{
+    width: 100%;
+    border: solid 1.5px;
+    border-color: black;
+    background-color: yellow;
     text-align: center;
     padding: 0.5em;
     padding-right: 0px;

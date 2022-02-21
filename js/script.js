@@ -42,3 +42,21 @@ function MQTTconnect()
     mqtt.connect(options); //connect
 
 }
+
+function changeLights()
+{
+    console.log("ALLO");
+    if($("#light_state").html() == "Lights off")
+    {
+        $("#light_state").html("Lights on");
+        $("#light_state").css("backgroundColor","yellow");
+        $("#light_state").css("color","black");
+    }
+    else
+    {
+        $("#light_state").html("Lights off");
+        $("#light_state").css("backgroundColor","black");
+        $("#light_state").css("color","white");
+
+    }
+}
