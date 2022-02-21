@@ -20,7 +20,6 @@ function onConnect()
 
     console.log("Connected");
     mqtt.subscribe("carSecurityState");
-    sendParams();
 
 }
 
@@ -45,18 +44,26 @@ function MQTTconnect()
 
 function changeLights()
 {
-    console.log("ALLO");
     if($("#light_state").html() == "Lights off")
     {
-        $("#light_state").html("Lights on");
-        $("#light_state").css("backgroundColor","yellow");
-        $("#light_state").css("color","black");
+        turnLightsOn();
     }
     else
     {
-        $("#light_state").html("Lights off");
-        $("#light_state").css("backgroundColor","black");
-        $("#light_state").css("color","white");
-
+        turnLightsOff();
     }
+}
+
+function turnLightsOn()
+{
+    $("#light_state").html("Lights on");
+    $("#light_state").css("backgroundColor","yellow");
+    $("#light_state").css("color","black");
+}
+
+function turnLightsOff()
+{
+    $("#light_state").html("Lights off");
+    $("#light_state").css("backgroundColor","black");
+    $("#light_state").css("color","white");
 }
