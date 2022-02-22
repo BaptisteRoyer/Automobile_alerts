@@ -20,4 +20,16 @@
     padding-right: 0px;
     padding-left: 0px;
     border-radius:5px;
+    margin-bottom: 4px;
+}
+
+#turn_off_alarm{
+    width: 100%;
+    border: solid 1.5px;
+    border-color: black;
+    text-align: center;
+    padding: 0.5em;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-radius:5px;
 }

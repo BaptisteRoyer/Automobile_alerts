@@ -1,6 +1,6 @@
 var mqtt;
 var reconnectTimeout = 2000;
-var host = "192.168.144.154"; //change this according to your brokers IP
+var host = "192.168.43.58"; //change this according to your brokers IP
 var port = 9001;
 
 function onMessageArrived(r_message)
@@ -9,8 +9,13 @@ function onMessageArrived(r_message)
 
     if(r_message.destinationName == "carSecurityState")
     {
-        console.log("ALED ON VOLE MON AUTO");
+        changeAlert()
     }
+    else if(r_message.destinationName == "changeLightsState")
+    {
+        changeLights();
+    }
+
 
 }
 
@@ -20,6 +25,7 @@ function onConnect()
 
     console.log("Connected");
     mqtt.subscribe("carSecurityState");
+    mqtt.subscribe("changeLightsState");
 
 }
 
@@ -42,6 +48,23 @@ function MQTTconnect()
 
 }
 
+function sendMqttChangeLights()
+{
+    var topic = "changeLightsState";
+    message = new Paho.MQTT.Message("");
+    message.destinationName = topic;
+    mqtt.send(message);
+}
+
+
+function sendMqttTurnOffAlarm()
+{
+    var topic = "carSecurityState";
+    message = new Paho.MQTT.Message("");
+    message.destinationName = topic;
+    mqtt.send(message);
+}
+
 function changeLights()
 {
     if($("#light_state").html() == "Lights off")
@@ -52,6 +75,7 @@ function changeLights()
     {
         turnLightsOff();
     }
+
 }
 
 function turnLightsOn()
@@ -66,4 +90,20 @@ function turnLightsOff()
     $("#light_state").html("Lights off");
     $("#light_state").css("backgroundColor","black");
     $("#light_state").css("color","white");
+}
+
+function changeAlert() 
+{
+    if($("#car_state").html() == "No intruder")
+    {
+        $("#car_state").html("INTRUDER !!!");
+        $("#car_state").css("background-color","red");
+       
+    }
+    else
+    {
+        $("#car_state").html("No intruder");
+        $("#car_state").css("background-color","white");
+    }
+    
 }

@@ -14,10 +14,11 @@
 <body>
     <div>
         <div id="car_state">No intruder</div>
-        <button id="light_state" onclick=changeLights()>Lights on</button>
+        <button id="light_state" onclick=sendMqttChangeLights()>Lights on</button>
+        <button id="turn_off_alarm" onclick=sendMqttTurnOffAlarm()>Turn off alert</button>
     </div>
     <script>
-        //MQTTconnect();
+        MQTTconnect();
     </script>
 </body>
 
