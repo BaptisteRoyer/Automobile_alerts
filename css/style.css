@@ -13,8 +13,9 @@
 #light_state{
     width: 100%;
     border: solid 1.5px;
-    border-color: white;
+    border-color: black;
     background-color: black;
+    color: white;
     text-align: center;
     padding: 0.5em;
     padding-right: 0px;
