@@ -7,7 +7,7 @@ function onMessageArrived(r_message)
 {
     out_msg = r_message.payloadString;
 
-    if(r_message.destinationName == "carSecurityState")
+    if(r_message.destinationName == "carSecurityStateOn")
     {
         changeAlert()
     }
@@ -24,7 +24,7 @@ function onConnect()
     // Once a connection has been made, make a subscription and send a message.
 
     console.log("Connected");
-    mqtt.subscribe("carSecurityState");
+    mqtt.subscribe("carSecurityStateOn");
     mqtt.subscribe("changeLightsState");
 
 }
@@ -61,7 +61,7 @@ function sendMqttTurnOffAlarm()
 {
     if($("#car_state").html() != "No intruder")
     {
-        var topic = "carSecurityState";
+        var topic = "carSecurityStateOff";
         message = new Paho.MQTT.Message("");
         message.destinationName = topic;
         mqtt.send(message);
@@ -101,11 +101,6 @@ function changeAlert()
     {
         $("#car_state").html("INTRUDER !!!");
         $("#car_state").css("background-color","red");  
-    }
-    else
-    {
-        $("#car_state").html("No intruder");
-        $("#car_state").css("background-color","white");
     }
     
 }

@@ -14,20 +14,22 @@ const long MQTT_PORT  = 1883;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-bool ledState = true;
+bool ledState = false;
 bool carAlert = false;
 bool prevCarAlert = false;
 
 void callback(char* topic, byte* payload, unsigned int length)
 {  
-  
+
+  //if the lights state is changed at some point
   if((strcmp(topic,"changeLightsState")) == 0)
   {
       Serial.println(ledState);
       ledState = !ledState;
   }
 
-  else if((strcmp(topic,"carSecurityState")))
+  //if the user presses the button on site to turn off alarm
+  else if((strcmp(topic,"carSecurityStateOff")))
   {
     prevCarAlert = false;
   }
@@ -36,6 +38,7 @@ void callback(char* topic, byte* payload, unsigned int length)
 
 void setup(void)
 {
+  Serial.println(carAlert);
   // Debug purposes
   Serial.begin(115200);
   
@@ -70,7 +73,7 @@ void loop(void)
     {
       Serial.println("Client connected !");
       client.subscribe("changeLightsState");
-      client.subscribe("carSecurityState");
+      client.subscribe("carSecurityStateOff");
       client.setCallback(callback);
     } 
     
@@ -85,10 +88,11 @@ void loop(void)
     }
   }
 
+  //if previously the alarm wasn't on and something passes on the actuator, turn on alarm
   if (carAlert && !prevCarAlert)
   {
-    client.publish("carSecurityState","");
-    prevCarAlert = true;
+      client.publish("carSecurityStateOn","");
+      prevCarAlert = true;
   } 
   
   
