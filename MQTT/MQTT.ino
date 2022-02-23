@@ -11,6 +11,9 @@ const char *AP_PASSWD = "Isischat45";
 const char *MQTT_IP   = "192.168.43.58";
 const long MQTT_PORT  = 1883;
 
+WiFiClient espClient;
+PubSubClient client(espClient);
+
 bool ledState = true;
 bool carAlert = false;
 bool prevCarAlert = false;
@@ -20,6 +23,7 @@ void callback(char* topic, byte* payload, unsigned int length)
   
   if((strcmp(topic,"changeLightsState")) == 0)
   {
+      Serial.println(ledState);
       ledState = !ledState;
   }
 
