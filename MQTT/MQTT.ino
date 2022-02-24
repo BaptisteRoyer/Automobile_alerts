@@ -24,8 +24,8 @@ void callback(char* topic, byte* payload, unsigned int length)
   //if the lights state is changed at some point
   if((strcmp(topic,"changeLightsState")) == 0)
   {
-      Serial.println(ledState);
       ledState = !ledState;
+      Serial.println(ledState);
   }
 
   //if the user presses the button on site to turn off alarm
@@ -38,7 +38,6 @@ void callback(char* topic, byte* payload, unsigned int length)
 
 void setup(void)
 {
-  Serial.println(carAlert);
   // Debug purposes
   Serial.begin(115200);
   
@@ -72,6 +71,7 @@ void loop(void)
     if (client.connect("clientESPSubscriber"))
     {
       Serial.println("Client connected !");
+      Serial.println(carAlert);
       client.subscribe("changeLightsState");
       client.subscribe("carSecurityStateOff");
       client.setCallback(callback);
