@@ -59,12 +59,9 @@ function sendMqttChangeLights()
 
 function sendMqttTurnOffAlarm()
 {
-    if($("#car_state").html() != "No intruder")
-    {
-        var topic = "carSecurityStateOff";
-        message = new Paho.MQTT.Message("");
-        message.destinationName = topic;
-        mqtt.send(message);
+    if($("#car_state").html() != "No intruder"){
+        $("#car_state").html("No intruder");
+        $("#car_state").css("background-color","white");
     }
 }
 
